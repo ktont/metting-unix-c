@@ -1,0 +1,22 @@
+{
+  "name": "metting-unix-c",
+  "version": "1.0.0",
+  "description": "技术分享unix v6操作系统",
+  "main": "main.js",
+  "engines": {
+    "node": ">= 8.4.0"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
