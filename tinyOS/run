@@ -1,0 +1,7 @@
+: -O优化，会把死循环后的代码删除, 编译器已经非常“聪明”
+cc -c 3.c
+as 1.s
+mv a.out 1.o
+ld -x 1.o 3.o 
+sync
+sync

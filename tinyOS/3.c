@@ -1,0 +1,3 @@
+int returnA() {
+	return 'A';
+}

@@ -3,11 +3,11 @@ const fs = require('fs');
 const output = require('./output.js');
 const { log, slow, quick, parse } = output;
 
-let chapter = 1;
+let chapter = 8;
 let playIdx = 0;
 let playPPT = [];
 
-let stopPrelude = false;
+let stopPrelude = true;
 prelude(() => stopPrelude);
 
 function exists(file) {
@@ -32,6 +32,7 @@ function play() {
     chapter++;
   }
 }
+
 
 process.stdin.resume();
 process.stdin.on('data', function(t) {

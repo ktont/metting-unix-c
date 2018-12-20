@@ -21,7 +21,7 @@ module.exports = [
 
 chalk
 `
-                   {bold 引子：chmod 777}
+                   {bold 引子：chmod 777 与八进制}
 `,
 
 chalk
@@ -72,7 +72,10 @@ DESCRIPTION
      000 nul  001 soh  002 stx  003 etx  004 eot  005 enq  006 ack  007 bel
      010 bs   011 ht   012 nl   013 vt   014 np   015 cr   016 so   017 si
      040 sp   041  !   042  "   043  #   044  $   045  %   046  &   047  '
-     100  @   {red 101  A   102  B   103  C}   104  D   105  E   106  F   107  G
+     100  @   {red 101  A   102  B}   103  C   104  D   105  E   106  F   107  G
+     140  \`   141  a   142  b   143  c   144  d   145  e   146  f   147  g
+     170  x   171  y   172  z   173  {   174  |   175  }   176  ~   177 del
+
 `,
 
 chalk
