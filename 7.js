@@ -1,46 +1,141 @@
-const chalk = require(`chalk`);
+const chalk = require('chalk');
 
 module.exports = [
 chalk
 `
-                   {bold 真实的UNIX的进程切换 }
+                   {bold 一个例子：修改栈帧用来模拟进程切换 }
+`,
+
+'第一步',
+
+chalk
+`quick
+    {hex('#0000ff') 还用之前的 tinyOS 环境}
+
+`,
+
+'第二步',
+
+chalk
+`quick
+    {hex('#0000ff') 使用下面的应用}
+`,
+
+chalk
+`slow
+    {cyan int} {magenta returnA}() \{
+        {magenta returnB}();
+        return {red 'A'};
+    \}
+
+    {cyan int} {magenta returnB}() \{
+        {green for(;;); } {grey // 设置断点 }
+        return {red 'B'};
+    \}
+
+`,
+
+'第三步',
+chalk
+`
+    {hex('#0000ff') 编译执行}
+
+`,
+
+`
+    $ pdp11 bare.ini
+`,
+
+chalk
+`slow
+    PDP-11 simulator V3.9-0
+    Disabling XQ
+`,
+
+chalk
+`slow
+    @{green /36/a.out}
+`,
+
+chalk
+`quick
+    {grey ctrl-E}
+`,
+
+chalk
+`slow
+    Simulation stopped, PC: {red 000432} ({cyan BR} {bgRed 432})
+`,
+
+chalk
+`quick
+    sim> e sp,r5 {grey ; 检查栈帧}
+`,
+
+chalk
+`slow
+    SP: {bgGreen 000750}
+    R5: {bgMagenta 000760}
+`,
+
+chalk
+`quick
+    sim> e 750-1000 {grey ; 公式 sp-1000 检查栈}
+`,
+
+chalk
+`slow
+    {bgGreen 750}:    000366
+    752:    000002
+    754:    000003
+    756:    000004
+    {bgMagenta 760}:    {bgBlue 000774}
+    762:    000414
+    {dim 764}:    000366
+    766:    000002
+    770:    000003
+    772:    000004
+    {bgBlue 774}:    000005
+    776:    000350
+    1000:   000000
+`,
+
+chalk
+`quick
+    sim> d r5 000774  {grey ; 公式 (r5)->r5 修改 r5 为上一帧}
+`,
+
+chalk
+`quick
+    sim> d sp 764     {grey ; 公式 r5-4  修改 sp 为下一帧栈顶}
+`,
+
+chalk
+`quick
+    sim> d pc 434     {grey ; 公式 pc+2  去掉断点}
+`,
+
+chalk
+`quick
+    sim> g            {grey ; 继续执行}
+`,
+
+
+
+'最后一步',
+
+`quick
+    sim> e r0
+`,
+
+chalk
+`slow
+    R0:   {cyan 000102}   {red B !!!}    {grey ; 最终目的达成}
+
 `,
 
 `
 
-如果你非要知道真实的世界，那么就会有一些新概念蹦出来:`,
-`    1. MMU`,
-`    2. 内核模式用户模式`,
-`    3. proc 数据结构`,
-`    4. user 数据结构`,
-`    5. 中断和陷入`,
-`    6. 内核模式 ISA6 和 U 和 PPDA`,
-
-`
-
-新建进程流程：`,
-chalk
-`    1. {green newproc} 生成新进程`,
-`    2. sched 开始调度`,
-`    3. sleep 当前进程等待`,
-chalk
-`    4. {green swtch} 切换进程 {blue （此处修改了栈帧和返回值）}`,
-
-`
-
-
-普通分时逻辑`,
-
-`    1. 1/20s 间隔发生时钟中断`,
-chalk
-`    2. psw 和 pc 压入{magenta 内核栈}`,
-`    3. 中断处理函数 call 和 clock`,
-`    4. 保存 r0 r1, lions 570行 779行`,
-`    5. sched 开始调度`,
-`    6. sleep 当前进程等待`,
-chalk
-`    7. {green swtch} 切换进程 {blue （此处修改了栈帧和返回值）}`,
-`    8. 返回中断处理函数 call 和 clock`,
-chalk
-`    9. 恢复 r1 r0 {blue （返回值被覆盖）} {grey lions 802行 804行}`,
+    现在开始动手做.......
+`,
 ];

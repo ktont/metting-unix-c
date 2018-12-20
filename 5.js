@@ -1,81 +1,65 @@
 const chalk = require('chalk');
 
-var table = new Table({
-    head: ['返回值', '含义']
-  , colWidths: [10, 30]
-});
-
-table.push(
-['正数', '父进程'],
-['0', '子进程'],
-['-1', '失败'],
-);
-
-
 module.exports = [
 chalk`
-        {bold 记不住的系统调用 fork}
+        {bold 一个例子：编写一个 tiny 操作系统用来跑一个函数}
+`,
+
+'第一步',
+
+chalk
+`quick
+    {hex('#0000ff') 三个文件，磁盘 copy 进去}
+`,
+
+'第二步',
+
+chalk
+`quick
+    {hex('#0000ff') 编译}
+`,
+
+'第三步',
+chalk
+`
+    {hex('#0000ff') 执行}
+
 `,
 
 `
-fork系统调用的特点
+    $ pdp11 bare.ini
 `,
 
-chalk`
-    1. 返回两次
-`,
-`image
-        _img/fuck.jpg
-`,
-
-`
-    2. 唯一用来生成一个进程的方法
+chalk
+`slow
+    PDP-11 simulator V3.9-0
+    Disabling XQ
 `,
 
-`
-    3. 有失败的可能且概率不低
+chalk
+`slow
+    @{green /36/a.out}
 `,
 
-`
-    4. 子进程是父进程的一份copy
+chalk
+`quick
+    {grey ctrl-E}
 `,
 
-`
-到底子进程返回0还是父进程返回0很难记忆, 如何理解？
+'最后一步',
+
+`quick
+    sim> e r0
 `,
 
-`
-fork 的底层的设计是
-`,
+chalk
+`slow
+    R0:   {cyan 000102}   {red A}    {grey ; 目的达成}
 
-`
-    父进程返回子进程的id
-    子进程返回父进程的id
 `,
 
 `
-一种编码
-`，
 
-table。toString(),
-
-`
-  疑问：因为子进程是父进程copy，所以它们的正文段是相同的。
-       那么它们的执行逻辑到底是怎么被分开的？
+    现在开始动手做.......
 `,
-
-`
-  答案：当子进程被调度的时候，它的栈帧被修改从而返回了一个不同的值。
-       这是本次分享的主题 -- UNIX 进程切换
-       也是 UNIX 系统最难读懂的地方
-`,
-
-`
-下面通过一个例子，来模拟这种处理，这个例子
-    1. 在前面做的 tinyOS 上执行
-    2. 函数 A 调用 函数 B，在 B 中修改栈帧从而实现修改 A 的返回值
-`,
-
-'   现在，看下这个例子'
-
 ];

@@ -1,141 +1,81 @@
 const chalk = require('chalk');
 
+var table = new Table({
+    head: ['返回值', '含义']
+  , colWidths: [10, 30]
+});
+
+table.push(
+['正数', '父进程'],
+['0', '子进程'],
+['-1', '失败'],
+);
+
+
 module.exports = [
-chalk
-`
-                   {bold 一个例子：修改栈帧用来模拟进程切换 }
-`,
-
-'第一步',
-
-chalk
-`quick
-    {hex('#0000ff') 还用之前的 tinyOS 环境}
-
-`,
-
-'第二步',
-
-chalk
-`quick
-    {hex('#0000ff') 使用下面的应用}
-`,
-
-chalk
-`slow
-    {cyan int} {magenta returnA}() \{
-        {magenta returnB}();
-        return {red 'A'};
-    \}
-
-    {cyan int} {magenta returnB}() \{
-        {green for(;;); } {grey // 设置断点 }
-        return {red 'B'};
-    \}
-
-`,
-
-'第三步',
-chalk
-`
-    {hex('#0000ff') 编译执行}
-
+chalk`
+        {bold 记不住的系统调用 fork}
 `,
 
 `
-    $ pdp11 bare.ini
+fork系统调用的特点
 `,
 
-chalk
-`slow
-    PDP-11 simulator V3.9-0
-    Disabling XQ
+chalk`
+    1. 返回两次
 `,
-
-chalk
-`slow
-    @{green /36/a.out}
-`,
-
-chalk
-`quick
-    {grey ctrl-E}
-`,
-
-chalk
-`slow
-    Simulation stopped, PC: {red 000432} ({cyan BR} {bgRed 432})
-`,
-
-chalk
-`quick
-    sim> e sp,r5 {grey ; 检查栈帧}
-`,
-
-chalk
-`slow
-    SP: {bgGreen 000750}
-    R5: {bgMagenta 000760}
-`,
-
-chalk
-`quick
-    sim> e 750-1000 {grey ; 公式 sp-1000 检查栈}
-`,
-
-chalk
-`slow
-    {bgGreen 750}:    000366
-    752:    000002
-    754:    000003
-    756:    000004
-    {bgMagenta 760}:    {bgBlue 000774}
-    762:    000414
-    {dim 764}:    000366
-    766:    000002
-    770:    000003
-    772:    000004
-    {bgBlue 774}:    000005
-    776:    000350
-    1000:   000000
-`,
-
-chalk
-`quick
-    sim> d r5 000774  {grey ; 公式 (r5)->r5 修改 r5 为上一帧}
-`,
-
-chalk
-`quick
-    sim> d sp 764     {grey ; 公式 r5-4  修改 sp 为下一帧栈顶}
-`,
-
-chalk
-`quick
-    sim> d pc 434     {grey ; 公式 pc+2  去掉断点}
-`,
-
-chalk
-`quick
-    sim> g            {grey ; 继续执行}
-`,
-
-
-
-'最后一步',
-
-`quick
-    sim> e r0
-`,
-
-chalk
-`slow
-    R0:   {cyan 000102}   {red B !!!}    {grey ; 最终目的达成}
-
+`image
+        _img/fuck.jpg
 `,
 
 `
-
-    现在开始动手做.......
+    2. 唯一用来生成一个进程的方法
 `,
+
+`
+    3. 有失败的可能且概率不低
+`,
+
+`
+    4. 子进程是父进程的一份copy
+`,
+
+`
+到底子进程返回0还是父进程返回0很难记忆, 如何理解？
+`,
+
+`
+fork 的底层的设计是
+`,
+
+`
+    父进程返回子进程的id
+    子进程返回父进程的id
+`,
+
+`
+一种编码
+`，
+
+table。toString(),
+
+`
+  疑问：因为子进程是父进程copy，所以它们的正文段是相同的。
+       那么它们的执行逻辑到底是怎么被分开的？
+`,
+
+`
+  答案：当子进程被调度的时候，它的栈帧被修改从而返回了一个不同的值。
+       这是本次分享的主题 -- UNIX 进程切换
+       也是 UNIX 系统最难读懂的地方
+`,
+
+`
+下面通过一个例子，来模拟这种处理，这个例子
+    1. 在前面做的 tinyOS 上执行
+    2. 函数 A 调用 函数 B，在 B 中修改栈帧从而实现修改 A 的返回值
+`,
+
+'   现在，看下这个例子'
+
 ];
