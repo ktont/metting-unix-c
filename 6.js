@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const Table = require('cli-table3');
 
 var table = new Table({
     head: ['返回值', '含义']
@@ -25,7 +26,7 @@ chalk`
     1. 返回两次
 `,
 `image
-        _img/fuck.jpg
+        _img/fuck.png
 `,
 
 `
@@ -55,9 +56,9 @@ fork 的底层的设计是
 
 `
 一种编码
-`，
+`,
 
-table。toString(),
+table.toString(),
 
 `
   疑问：因为子进程是父进程copy，所以它们的正文段是相同的。

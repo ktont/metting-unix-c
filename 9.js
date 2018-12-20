@@ -9,7 +9,7 @@ chalk
 '认识一个人 Fritz-Rudolf Güntsch',
 
 `image
-    _img/440px-Fritz-Rudolf_Güntsch.jpg
+    _img/f.jpg
 `,
 
 chalk
@@ -18,8 +18,53 @@ chalk
 `,
 
 `image
-    _img/660px-MC68451_p1160081.jpg
+    _img/m.jpg
 `,
+
+`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             谢谢大家！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`,
+
+
+
 
 ];
 

@@ -3,11 +3,11 @@ const fs = require('fs');
 const output = require('./output.js');
 const { log, slow, quick, parse } = output;
 
-let chapter = 8;
+let chapter = 1;
 let playIdx = 0;
 let playPPT = [];
 
-let stopPrelude = true;
+let stopPrelude = false;
 prelude(() => stopPrelude);
 
 function exists(file) {
