@@ -35,6 +35,7 @@ chalk
 chalk
 `    2. psw 和 pc 压入{magenta 内核栈}`,
 `    3. 中断处理函数 call 和 clock`,
+chalk
 `    4. 保存 r0 r1, {grey lions 570行 779行}`,
 `    5. sched 开始调度`,
 `    6. sleep 当前进程等待`,

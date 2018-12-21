@@ -54,7 +54,7 @@ chalk
 
 chalk
 `slow
-    R0:   {cyan 000102}   {red A}    {grey ; 目的达成}
+    R0:   {cyan 000101}   {red A}    {grey ; 目的达成}
 
 `,
 
